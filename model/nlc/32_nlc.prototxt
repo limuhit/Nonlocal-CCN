@@ -1,0 +1,538 @@
+input: "data2"
+input_dim:1
+input_dim:32
+input_dim:48
+input_dim:48
+layer {
+  name: "entropy_nlc_pre"
+  type: "NolocalGemmV4Pre"
+  bottom: "data2"
+  top: "entropy_nlc_dist"
+}
+layer {
+  name: "entropy_nlc_dist_conv"
+  type: "Convolution"
+  bottom: "entropy_nlc_dist"
+  top: "entropy_nlc_dist_conv"
+  convolution_param {
+    num_output: 32
+    kernel_size: 1
+    stride: 1
+    weight_filler { type: "xavier" }  
+    constrain: 5
+    group_in: 1
+    group_out: 1
+  }
+}
+layer {
+  name: "entropy_nlc_post"
+  type: "NolocalGemmV4Post"
+  bottom: "data2"
+  bottom: "entropy_nlc_dist_conv"
+  top: "entropy_nlc_data"
+  top: "entropy_nlc_wt"
+  nonlocal_param{groups: 32 code:true mean:3}
+}
+layer{
+  name: "gdata"
+  type: "ConstScale"
+  bottom: "data2"
+  top: "gdata"
+  const_scale_param{
+	scale:0.125
+  }
+}
+layer {
+  name: "ent_wt_conv1"
+  type: "Convolution"
+  bottom: "gdata"
+  top: "ent_wt_conv1"
+  convolution_param {
+    num_output: 288
+    pad: 2
+    kernel_size: 5
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    constrain: 5
+    group_in: 1
+    group_out: 9
+  }
+}
+layer {
+  name: "ent_wt_conv1_relu"
+  type: "PReLU"
+  bottom: "ent_wt_conv1"
+  top: "ent_wt_conv1"
+}
+layer{
+  name: "ent_wt_merge"
+  type: "Merge"
+  bottom: "ent_wt_conv1"
+  bottom: "entropy_nlc_wt"
+  top: "ent_wt_merge"
+  merge_param{
+		ngroup: 32
+		merge:GROUP
+  }
+}
+layer {
+  name: "ent_wt_conv2"
+  type: "Convolution"
+  bottom: "ent_wt_merge"
+  top: "ent_wt_conv2"
+  convolution_param {
+    num_output: 288
+    pad: 2
+    kernel_size: 5
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    constrain: 6
+    group_in: 10
+    group_out: 9
+  }
+}
+layer {
+  name: "ent_wt_conv2_relu"
+  type: "PReLU"
+  bottom: "ent_wt_conv2"
+  top: "ent_wt_conv2"
+}
+layer {
+  name: "ent_wt_blk1_1"
+  type: "Convolution"
+  bottom: "ent_wt_conv2"
+  top: "ent_wt_blk1_1"
+  convolution_param {
+    num_output: 288
+    pad: 2
+    kernel_size: 5
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    constrain: 6
+    group_in: 9
+    group_out: 9
+  }
+}
+layer {
+  name: "ent_wt_blk1_1_relu"
+  type: "PReLU"
+  bottom: "ent_wt_blk1_1"
+  top: "ent_wt_blk1_1"
+}
+layer {
+  name: "ent_wt_blk1_2"
+  type: "Convolution"
+  bottom: "ent_wt_blk1_1"
+  top: "ent_wt_blk1_2"
+  convolution_param {
+    num_output: 288
+    pad: 2
+    kernel_size: 5
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    constrain: 6
+    group_in: 9
+    group_out: 9
+  }
+}
+layer {
+  name: "ent_wt_blk1_2_relu"
+  type: "PReLU"
+  bottom: "ent_wt_blk1_2"
+  top: "ent_wt_blk1_2"
+}
+layer {
+  name: "ent_wt_blk1"
+  type: "Eltwise"
+  bottom: "ent_wt_conv2"
+  bottom: "ent_wt_blk1_2"
+  top: "ent_wt_blk1"
+}
+layer {
+  name: "ent_wt_out"
+  type: "Convolution"
+  bottom: "ent_wt_blk1"
+  top: "ent_wt_out"
+  convolution_param {
+    num_output: 288
+    pad: 2
+    kernel_size: 5
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    constrain: 6
+    group_in: 9
+    group_out: 9
+  }
+}
+layer {
+  name: "ent_wt_out_sig"
+  type: "Sigmoid"
+  bottom: "ent_wt_out"
+  top: "ent_wt_out"
+}
+layer {
+  name: "ent_dt_conv1"
+  type: "Convolution"
+  bottom: "entropy_nlc_data"
+  top: "ent_dt_conv1"
+  convolution_param {
+    num_output: 288
+    pad: 2
+    kernel_size: 5
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    constrain: 6
+    group_in: 1
+    group_out: 9
+  }
+}
+layer {
+  name: "ent_dt_conv1_relu"
+  type: "PReLU"
+  bottom: "ent_dt_conv1"
+  top: "ent_dt_conv1"
+}
+
+layer {
+  name: "ent_dt_conv2"
+  type: "Convolution"
+  bottom: "ent_dt_conv1"
+  top: "ent_dt_conv2"
+  convolution_param {
+    num_output: 288
+    pad: 2
+    kernel_size: 5
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    constrain: 6
+    group_in: 9
+    group_out: 9
+  }
+}
+layer {
+  name: "ent_dt_conv2_relu"
+  type: "PReLU"
+  bottom: "ent_dt_conv2"
+  top: "ent_dt_conv2"
+}
+layer {
+  name: "ent_dt_blk1_1"
+  type: "Convolution"
+  bottom: "ent_dt_conv2"
+  top: "ent_dt_blk1_1"
+  convolution_param {
+    num_output: 288
+    pad: 2
+    kernel_size: 5
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    constrain: 6
+    group_in: 9
+    group_out: 9
+  }
+}
+layer {
+  name: "ent_dt_blk1_1_relu"
+  type: "PReLU"
+  bottom: "ent_dt_blk1_1"
+  top: "ent_dt_blk1_1"
+}
+layer {
+  name: "ent_dt_blk1_2"
+  type: "Convolution"
+  bottom: "ent_dt_blk1_1"
+  top: "ent_dt_blk1_2"
+  convolution_param {
+    num_output: 288
+    pad: 2
+    kernel_size: 5
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    constrain: 6
+    group_in: 9
+    group_out: 9
+  }
+}
+layer {
+  name: "ent_dt_blk1_2_relu"
+  type: "PReLU"
+  bottom: "ent_dt_blk1_2"
+  top: "ent_dt_blk1_2"
+}
+layer {
+  name: "ent_dt_blk1"
+  type: "Eltwise"
+  bottom: "ent_dt_conv2"
+  bottom: "ent_dt_blk1_2"
+  top: "ent_dt_blk1"
+}
+layer{
+  name: "ent_nlc_out"
+  type: "Eltwise"
+  bottom: "ent_dt_blk1"
+  bottom: "ent_wt_out"
+  top: "ent_nlc_out"
+  eltwise_param{operation:PROD}
+}
+
+layer {
+  name: "conv1"
+  type: "Convolution"
+  bottom: "gdata"
+  top: "conv1"
+  convolution_param {
+    num_output: 288
+    pad: 2
+    kernel_size: 5
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    constrain: 5
+    group_in: 1
+    group_out: 9
+  }
+}
+layer {
+  name: "conv1_relu"
+  type: "PReLU"
+  bottom: "conv1"
+  top: "conv1"
+}
+
+layer{
+ name: "conv1_merge"
+ type: "Merge"
+ bottom: "conv1"
+ bottom: "ent_nlc_out"
+ top: "conv1_merge"
+ merge_param{
+		ngroup: 32
+		merge:GROUP
+  }
+}
+layer {
+  name: "conv2"
+  type: "Convolution"
+  bottom: "conv1_merge"
+  top: "conv2"
+  convolution_param {
+    num_output: 288
+    pad: 2
+    kernel_size: 5
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    constrain: 6
+    group_in: 18
+    group_out: 9
+  }
+}
+layer {
+  name: "conv2_relu"
+  type: "PReLU"
+  bottom: "conv2"
+  top: "conv2"
+}
+layer {
+  name: "ent_blk1_1"
+  type: "Convolution"
+  bottom: "conv2"
+  top: "ent_blk1_1"
+  convolution_param {
+    num_output: 288
+    pad: 2
+    kernel_size: 5
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    constrain: 6
+    group_in: 9
+    group_out: 9
+  }
+}
+layer {
+  name: "ent_blk1_1_relu"
+  type: "PReLU"
+  bottom: "ent_blk1_1"
+  top: "ent_blk1_1"
+}
+layer {
+  name: "ent_blk1_2"
+  type: "Convolution"
+  bottom: "ent_blk1_1"
+  top: "ent_blk1_2"
+  convolution_param {
+    num_output: 288
+    pad: 2
+    kernel_size: 5
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    constrain: 6
+    group_in: 9
+    group_out: 9
+  }
+}
+layer {
+  name: "ent_blk1_2_relu"
+  type: "PReLU"
+  bottom: "ent_blk1_2"
+  top: "ent_blk1_2"
+}
+layer {
+  name: "ent_blk1"
+  type: "Eltwise"
+  bottom: "conv2"
+  bottom: "ent_blk1_2"
+  top: "ent_blk1"
+}
+layer {
+  name: "ent_blk2_1"
+  type: "Convolution"
+  bottom: "ent_blk1"
+  top: "ent_blk2_1"
+  convolution_param {
+    num_output: 288
+    pad: 2
+    kernel_size: 5
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    constrain: 6
+    group_in: 9
+    group_out: 9
+  }
+}
+layer {
+  name: "ent_blk2_1_relu"
+  type: "PReLU"
+  bottom: "ent_blk2_1"
+  top: "ent_blk2_1"
+}
+layer {
+  name: "ent_blk2_2"
+  type: "Convolution"
+  bottom: "ent_blk2_1"
+  top: "ent_blk2_2"
+  convolution_param {
+    num_output: 288
+    pad: 2
+    kernel_size: 5
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    constrain: 6
+    group_in: 9
+    group_out: 9
+  }
+}
+layer {
+  name: "ent_blk2_2_relu"
+  type: "PReLU"
+  bottom: "ent_blk2_2"
+  top: "ent_blk2_2"
+}
+layer {
+  name: "ent_blk2"
+  type: "Eltwise"
+  bottom: "ent_blk1"
+  bottom: "ent_blk2_2"
+  top: "ent_blk2"
+}
+layer {
+  name: "ent_blk3_1"
+  type: "Convolution"
+  bottom: "ent_blk2"
+  top: "ent_blk3_1"
+  convolution_param {
+    num_output: 288
+    pad: 2
+    kernel_size: 5
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    constrain: 6
+    group_in: 9
+    group_out: 9
+  }
+}
+layer {
+  name: "ent_blk3_1_relu"
+  type: "PReLU"
+  bottom: "ent_blk3_1"
+  top: "ent_blk3_1"
+}
+layer {
+  name: "ent_blk3_2"
+  type: "Convolution"
+  bottom: "ent_blk3_1"
+  top: "ent_blk3_2"
+  convolution_param {
+    num_output: 288
+    pad: 2
+    kernel_size: 5
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    constrain: 6
+    group_in: 9
+    group_out: 9
+  }
+}
+layer {
+  name: "ent_blk3_2_relu"
+  type: "PReLU"
+  bottom: "ent_blk3_2"
+  top: "ent_blk3_2"
+}
+layer {
+  name: "ent_blk3"
+  type: "Eltwise"
+  bottom: "ent_blk2"
+  bottom: "ent_blk3_2"
+  top: "ent_blk3"
+}
+layer {
+  name: "pdata"
+  type: "Convolution"
+  bottom: "ent_blk3"
+  top: "pdata"
+  convolution_param {
+    num_output: 256
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    constrain: 6
+    group_in: 9
+    group_out: 8
+  }
+}

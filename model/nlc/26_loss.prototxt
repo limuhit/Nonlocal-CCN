@@ -1,0 +1,42 @@
+input:"data"
+input_dim:1
+input_dim:26
+input_dim:120
+input_dim:120
+
+input: "data4"
+input_dim:1
+input_dim:208
+input_dim:120
+input_dim:120
+force_backward: true
+layer {
+  name: "pdata_trans"
+  type: "MTranspose"
+  bottom: "data4"
+  top: "pdata_trans"
+  mtranspose_param {
+    groups: 8
+  }
+}
+layer {
+  name: "label_reshape"
+  type: "Reshape"
+  bottom: "data"
+  top: "label_reshape"
+  propagate_down: false
+  reshape_param {
+    shape {
+      dim: -1
+    }
+  }
+}
+layer{
+  name: "ent_loss"
+  bottom: "pdata_trans"
+  bottom: "label_reshape"
+  top: "ent_loss"
+  type: "SoftmaxWithLoss"
+  loss_weight: 1
+}
+

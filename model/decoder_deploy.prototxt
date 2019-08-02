@@ -1,0 +1,1403 @@
+input: "encoder_out"
+input_dim:1
+input_dim:64
+input_dim:150
+input_dim:150
+layer {
+  name: "decoder_input"
+  type: "Convolution"
+  bottom: "encoder_out"
+  top: "decoder_input"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_input_relu"
+  type: "TPReLU"
+  bottom: "decoder_input"
+  top: "decoder_input"
+}
+layer {
+  name: "decoder_blk3_dnode1_conv1"
+  type: "Convolution"
+  bottom: "decoder_input"
+  top: "decoder_blk3_dnode1_conv1"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk3_dnode1_conv1_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk3_dnode1_conv1"
+  top: "decoder_blk3_dnode1_conv1"
+}
+layer {
+  name: "decoder_blk3_dnode1_conv2"
+  type: "Convolution"
+  bottom: "decoder_blk3_dnode1_conv1"
+  top: "decoder_blk3_dnode1_conv2"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk3_dnode1_conv2_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk3_dnode1_conv2"
+  top: "decoder_blk3_dnode1_conv2"
+}
+layer {
+  name: "decoder_blk3_dnode1_x2"
+  type: "Convolution"
+  bottom: "decoder_blk3_dnode1_conv2"
+  top: "decoder_blk3_dnode1_x2"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk3_dnode1_x2_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk3_dnode1_x2"
+  top: "decoder_blk3_dnode1_x2"
+}
+layer {
+  name: "decoder_blk3_dnode2_conv1"
+  type: "Convolution"
+  bottom: "decoder_blk3_dnode1_x2"
+  top: "decoder_blk3_dnode2_conv1"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk3_dnode2_conv1_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk3_dnode2_conv1"
+  top: "decoder_blk3_dnode2_conv1"
+}
+layer {
+  name: "decoder_blk3_dnode2_conv2"
+  type: "Convolution"
+  bottom: "decoder_blk3_dnode2_conv1"
+  top: "decoder_blk3_dnode2_conv2"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk3_dnode2_conv2_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk3_dnode2_conv2"
+  top: "decoder_blk3_dnode2_conv2"
+}
+layer {
+  name: "decoder_blk3_dnode2_x2"
+  type: "Convolution"
+  bottom: "decoder_blk3_dnode2_conv2"
+  top: "decoder_blk3_dnode2_x2"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk3_dnode2_x2_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk3_dnode2_x2"
+  top: "decoder_blk3_dnode2_x2"
+}
+layer {
+  name: "decoder_blk3_dnode3_conv1"
+  type: "Convolution"
+  bottom: "decoder_blk3_dnode2_x2"
+  top: "decoder_blk3_dnode3_conv1"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk3_dnode3_conv1_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk3_dnode3_conv1"
+  top: "decoder_blk3_dnode3_conv1"
+}
+layer {
+  name: "decoder_blk3_dnode3_conv2"
+  type: "Convolution"
+  bottom: "decoder_blk3_dnode3_conv1"
+  top: "decoder_blk3_dnode3_conv2"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk3_dnode3_conv2_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk3_dnode3_conv2"
+  top: "decoder_blk3_dnode3_conv2"
+}
+layer {
+  name: "decoder_blk3_dnode3_x2"
+  type: "Convolution"
+  bottom: "decoder_blk3_dnode3_conv2"
+  top: "decoder_blk3_dnode3_x2"
+  convolution_param {
+    num_output: 384
+    pad: 1
+    kernel_size: 3
+    stride: 2
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk3_dnode3_x2_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk3_dnode3_x2"
+  top: "decoder_blk3_dnode3_x2"
+}
+layer {
+  name: "decoder_blk3_unode3_x2_conv"
+  type: "Convolution"
+  bottom: "decoder_blk3_dnode3_x2"
+  top: "decoder_blk3_unode3_x2_conv"
+  convolution_param {
+    num_output: 768
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk3_unode3_x2_conv_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk3_unode3_x2_conv"
+  top: "decoder_blk3_unode3_x2_conv"
+}
+layer {
+  name: "decoder_blk3_unode3_x2"
+  type: "Dtow"
+  bottom: "decoder_blk3_unode3_x2_conv"
+  top: "decoder_blk3_unode3_x2"
+  dtow_param {
+    psize: 2
+  }
+}
+layer {
+  name: "decoder_blk3_name_unode3_data"
+  type: "Concat"
+  bottom: "decoder_blk3_unode3_x2"
+  bottom: "decoder_blk3_dnode3_conv2"
+  top: "decoder_blk3_name_unode3_data"
+}
+layer {
+  name: "decoder_blk3_unode3_conv1"
+  type: "Convolution"
+  bottom: "decoder_blk3_name_unode3_data"
+  top: "decoder_blk3_unode3_conv1"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk3_unode3_conv1_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk3_unode3_conv1"
+  top: "decoder_blk3_unode3_conv1"
+}
+layer {
+  name: "decoder_blk3_unode3_conv2"
+  type: "Convolution"
+  bottom: "decoder_blk3_unode3_conv1"
+  top: "decoder_blk3_unode3_conv2"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk3_unode3_conv2_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk3_unode3_conv2"
+  top: "decoder_blk3_unode3_conv2"
+}
+layer {
+  name: "decoder_blk3_unode2_x2"
+  type: "Convolution"
+  bottom: "decoder_blk3_unode3_conv2"
+  top: "decoder_blk3_unode2_x2"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk3_unode2_x2_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk3_unode2_x2"
+  top: "decoder_blk3_unode2_x2"
+}
+layer {
+  name: "decoder_blk3_name_unode2_data"
+  type: "Concat"
+  bottom: "decoder_blk3_unode2_x2"
+  bottom: "decoder_blk3_dnode2_conv2"
+  top: "decoder_blk3_name_unode2_data"
+}
+layer {
+  name: "decoder_blk3_unode2_conv1"
+  type: "Convolution"
+  bottom: "decoder_blk3_name_unode2_data"
+  top: "decoder_blk3_unode2_conv1"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk3_unode2_conv1_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk3_unode2_conv1"
+  top: "decoder_blk3_unode2_conv1"
+}
+layer {
+  name: "decoder_blk3_unode2_conv2"
+  type: "Convolution"
+  bottom: "decoder_blk3_unode2_conv1"
+  top: "decoder_blk3_unode2_conv2"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk3_unode2_conv2_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk3_unode2_conv2"
+  top: "decoder_blk3_unode2_conv2"
+}
+layer {
+  name: "decoder_blk3_unode1_x2"
+  type: "Convolution"
+  bottom: "decoder_blk3_unode2_conv2"
+  top: "decoder_blk3_unode1_x2"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk3_unode1_x2_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk3_unode1_x2"
+  top: "decoder_blk3_unode1_x2"
+}
+layer {
+  name: "decoder_blk3_name_unode1_data"
+  type: "Concat"
+  bottom: "decoder_blk3_unode1_x2"
+  bottom: "decoder_blk3_dnode1_conv2"
+  top: "decoder_blk3_name_unode1_data"
+}
+layer {
+  name: "decoder_blk3_unode1_conv1"
+  type: "Convolution"
+  bottom: "decoder_blk3_name_unode1_data"
+  top: "decoder_blk3_unode1_conv1"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk3_unode1_conv1_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk3_unode1_conv1"
+  top: "decoder_blk3_unode1_conv1"
+}
+layer {
+  name: "decoder_blk3_unode1_conv2"
+  type: "Convolution"
+  bottom: "decoder_blk3_unode1_conv1"
+  top: "decoder_blk3_unode1_conv2"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk3_unode1_conv2_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk3_unode1_conv2"
+  top: "decoder_blk3_unode1_conv2"
+}
+layer {
+  name: "decoder_blk3"
+  type: "Eltwise"
+  bottom: "decoder_input"
+  bottom: "decoder_blk3_unode1_conv2"
+  top: "decoder_blk3"
+}
+layer {
+  name: "decoder_conv3"
+  type: "Convolution"
+  bottom: "decoder_blk3"
+  top: "decoder_conv3"
+  convolution_param {
+    num_output: 768
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_conv3_relu"
+  type: "TPReLU"
+  bottom: "decoder_conv3"
+  top: "decoder_conv3"
+}
+layer {
+  name: "Dtow1"
+  type: "Dtow"
+  bottom: "decoder_conv3"
+  top: "Dtow1"
+  dtow_param {
+    psize: 2
+  }
+}
+layer {
+  name: "decoder_blk2_dnode1_conv1"
+  type: "Convolution"
+  bottom: "Dtow1"
+  top: "decoder_blk2_dnode1_conv1"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk2_dnode1_conv1_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk2_dnode1_conv1"
+  top: "decoder_blk2_dnode1_conv1"
+}
+layer {
+  name: "decoder_blk2_dnode1_conv2"
+  type: "Convolution"
+  bottom: "decoder_blk2_dnode1_conv1"
+  top: "decoder_blk2_dnode1_conv2"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk2_dnode1_conv2_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk2_dnode1_conv2"
+  top: "decoder_blk2_dnode1_conv2"
+}
+layer {
+  name: "decoder_blk2_dnode1_x2"
+  type: "Convolution"
+  bottom: "decoder_blk2_dnode1_conv2"
+  top: "decoder_blk2_dnode1_x2"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk2_dnode1_x2_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk2_dnode1_x2"
+  top: "decoder_blk2_dnode1_x2"
+}
+layer {
+  name: "decoder_blk2_dnode2_conv1"
+  type: "Convolution"
+  bottom: "decoder_blk2_dnode1_x2"
+  top: "decoder_blk2_dnode2_conv1"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk2_dnode2_conv1_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk2_dnode2_conv1"
+  top: "decoder_blk2_dnode2_conv1"
+}
+layer {
+  name: "decoder_blk2_dnode2_conv2"
+  type: "Convolution"
+  bottom: "decoder_blk2_dnode2_conv1"
+  top: "decoder_blk2_dnode2_conv2"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk2_dnode2_conv2_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk2_dnode2_conv2"
+  top: "decoder_blk2_dnode2_conv2"
+}
+layer {
+  name: "decoder_blk2_dnode2_x2"
+  type: "Convolution"
+  bottom: "decoder_blk2_dnode2_conv2"
+  top: "decoder_blk2_dnode2_x2"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 2
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk2_dnode2_x2_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk2_dnode2_x2"
+  top: "decoder_blk2_dnode2_x2"
+}
+layer {
+  name: "decoder_blk2_dnode3_conv1"
+  type: "Convolution"
+  bottom: "decoder_blk2_dnode2_x2"
+  top: "decoder_blk2_dnode3_conv1"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk2_dnode3_conv1_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk2_dnode3_conv1"
+  top: "decoder_blk2_dnode3_conv1"
+}
+layer {
+  name: "decoder_blk2_dnode3_conv2"
+  type: "Convolution"
+  bottom: "decoder_blk2_dnode3_conv1"
+  top: "decoder_blk2_dnode3_conv2"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk2_dnode3_conv2_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk2_dnode3_conv2"
+  top: "decoder_blk2_dnode3_conv2"
+}
+layer {
+  name: "decoder_blk2_dnode3_x2"
+  type: "Convolution"
+  bottom: "decoder_blk2_dnode3_conv2"
+  top: "decoder_blk2_dnode3_x2"
+  convolution_param {
+    num_output: 384
+    pad: 1
+    kernel_size: 3
+    stride: 2
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk2_dnode3_x2_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk2_dnode3_x2"
+  top: "decoder_blk2_dnode3_x2"
+}
+layer {
+  name: "decoder_blk2_unode3_x2_conv"
+  type: "Convolution"
+  bottom: "decoder_blk2_dnode3_x2"
+  top: "decoder_blk2_unode3_x2_conv"
+  convolution_param {
+    num_output: 768
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk2_unode3_x2_conv_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk2_unode3_x2_conv"
+  top: "decoder_blk2_unode3_x2_conv"
+}
+layer {
+  name: "decoder_blk2_unode3_x2"
+  type: "Dtow"
+  bottom: "decoder_blk2_unode3_x2_conv"
+  top: "decoder_blk2_unode3_x2"
+  dtow_param {
+    psize: 2
+  }
+}
+layer {
+  name: "decoder_blk2_name_unode3_data"
+  type: "Concat"
+  bottom: "decoder_blk2_unode3_x2"
+  bottom: "decoder_blk2_dnode3_conv2"
+  top: "decoder_blk2_name_unode3_data"
+}
+layer {
+  name: "decoder_blk2_unode3_conv1"
+  type: "Convolution"
+  bottom: "decoder_blk2_name_unode3_data"
+  top: "decoder_blk2_unode3_conv1"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk2_unode3_conv1_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk2_unode3_conv1"
+  top: "decoder_blk2_unode3_conv1"
+}
+layer {
+  name: "decoder_blk2_unode3_conv2"
+  type: "Convolution"
+  bottom: "decoder_blk2_unode3_conv1"
+  top: "decoder_blk2_unode3_conv2"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk2_unode3_conv2_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk2_unode3_conv2"
+  top: "decoder_blk2_unode3_conv2"
+}
+layer {
+  name: "decoder_blk2_unode2_x2_conv"
+  type: "Convolution"
+  bottom: "decoder_blk2_unode3_conv2"
+  top: "decoder_blk2_unode2_x2_conv"
+  convolution_param {
+    num_output: 768
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk2_unode2_x2_conv_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk2_unode2_x2_conv"
+  top: "decoder_blk2_unode2_x2_conv"
+}
+layer {
+  name: "decoder_blk2_unode2_x2"
+  type: "Dtow"
+  bottom: "decoder_blk2_unode2_x2_conv"
+  top: "decoder_blk2_unode2_x2"
+  dtow_param {
+    psize: 2
+  }
+}
+layer {
+  name: "decoder_blk2_name_unode2_data"
+  type: "Concat"
+  bottom: "decoder_blk2_unode2_x2"
+  bottom: "decoder_blk2_dnode2_conv2"
+  top: "decoder_blk2_name_unode2_data"
+}
+layer {
+  name: "decoder_blk2_unode2_conv1"
+  type: "Convolution"
+  bottom: "decoder_blk2_name_unode2_data"
+  top: "decoder_blk2_unode2_conv1"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk2_unode2_conv1_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk2_unode2_conv1"
+  top: "decoder_blk2_unode2_conv1"
+}
+layer {
+  name: "decoder_blk2_unode2_conv2"
+  type: "Convolution"
+  bottom: "decoder_blk2_unode2_conv1"
+  top: "decoder_blk2_unode2_conv2"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk2_unode2_conv2_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk2_unode2_conv2"
+  top: "decoder_blk2_unode2_conv2"
+}
+layer {
+  name: "decoder_blk2_unode1_x2"
+  type: "Convolution"
+  bottom: "decoder_blk2_unode2_conv2"
+  top: "decoder_blk2_unode1_x2"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk2_unode1_x2_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk2_unode1_x2"
+  top: "decoder_blk2_unode1_x2"
+}
+layer {
+  name: "decoder_blk2_name_unode1_data"
+  type: "Concat"
+  bottom: "decoder_blk2_unode1_x2"
+  bottom: "decoder_blk2_dnode1_conv2"
+  top: "decoder_blk2_name_unode1_data"
+}
+layer {
+  name: "decoder_blk2_unode1_conv1"
+  type: "Convolution"
+  bottom: "decoder_blk2_name_unode1_data"
+  top: "decoder_blk2_unode1_conv1"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk2_unode1_conv1_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk2_unode1_conv1"
+  top: "decoder_blk2_unode1_conv1"
+}
+layer {
+  name: "decoder_blk2_unode1_conv2"
+  type: "Convolution"
+  bottom: "decoder_blk2_unode1_conv1"
+  top: "decoder_blk2_unode1_conv2"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk2_unode1_conv2_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk2_unode1_conv2"
+  top: "decoder_blk2_unode1_conv2"
+}
+layer {
+  name: "decoder_blk2"
+  type: "Eltwise"
+  bottom: "Dtow1"
+  bottom: "decoder_blk2_unode1_conv2"
+  top: "decoder_blk2"
+}
+layer {
+  name: "decoder_conv2"
+  type: "Convolution"
+  bottom: "decoder_blk2"
+  top: "decoder_conv2"
+  convolution_param {
+    num_output: 768
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_conv2_relu"
+  type: "TPReLU"
+  bottom: "decoder_conv2"
+  top: "decoder_conv2"
+}
+layer {
+  name: "decoder_up2"
+  type: "Dtow"
+  bottom: "decoder_conv2"
+  top: "decoder_up2"
+  dtow_param {
+    psize: 2
+  }
+}
+layer {
+  name: "decoder_blk1_dnode1_conv1"
+  type: "Convolution"
+  bottom: "decoder_up2"
+  top: "decoder_blk1_dnode1_conv1"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk1_dnode1_conv1_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk1_dnode1_conv1"
+  top: "decoder_blk1_dnode1_conv1"
+}
+layer {
+  name: "decoder_blk1_dnode1_conv2"
+  type: "Convolution"
+  bottom: "decoder_blk1_dnode1_conv1"
+  top: "decoder_blk1_dnode1_conv2"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk1_dnode1_conv2_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk1_dnode1_conv2"
+  top: "decoder_blk1_dnode1_conv2"
+}
+layer {
+  name: "decoder_blk1_dnode1_x2"
+  type: "Convolution"
+  bottom: "decoder_blk1_dnode1_conv2"
+  top: "decoder_blk1_dnode1_x2"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 2
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk1_dnode1_x2_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk1_dnode1_x2"
+  top: "decoder_blk1_dnode1_x2"
+}
+layer {
+  name: "decoder_blk1_dnode2_conv1"
+  type: "Convolution"
+  bottom: "decoder_blk1_dnode1_x2"
+  top: "decoder_blk1_dnode2_conv1"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk1_dnode2_conv1_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk1_dnode2_conv1"
+  top: "decoder_blk1_dnode2_conv1"
+}
+layer {
+  name: "decoder_blk1_dnode2_conv2"
+  type: "Convolution"
+  bottom: "decoder_blk1_dnode2_conv1"
+  top: "decoder_blk1_dnode2_conv2"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk1_dnode2_conv2_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk1_dnode2_conv2"
+  top: "decoder_blk1_dnode2_conv2"
+}
+layer {
+  name: "decoder_blk1_dnode2_x2"
+  type: "Convolution"
+  bottom: "decoder_blk1_dnode2_conv2"
+  top: "decoder_blk1_dnode2_x2"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 2
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk1_dnode2_x2_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk1_dnode2_x2"
+  top: "decoder_blk1_dnode2_x2"
+}
+layer {
+  name: "decoder_blk1_dnode3_conv1"
+  type: "Convolution"
+  bottom: "decoder_blk1_dnode2_x2"
+  top: "decoder_blk1_dnode3_conv1"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk1_dnode3_conv1_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk1_dnode3_conv1"
+  top: "decoder_blk1_dnode3_conv1"
+}
+layer {
+  name: "decoder_blk1_dnode3_conv2"
+  type: "Convolution"
+  bottom: "decoder_blk1_dnode3_conv1"
+  top: "decoder_blk1_dnode3_conv2"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk1_dnode3_conv2_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk1_dnode3_conv2"
+  top: "decoder_blk1_dnode3_conv2"
+}
+layer {
+  name: "decoder_blk1_dnode3_x2"
+  type: "Convolution"
+  bottom: "decoder_blk1_dnode3_conv2"
+  top: "decoder_blk1_dnode3_x2"
+  convolution_param {
+    num_output: 384
+    pad: 1
+    kernel_size: 3
+    stride: 2
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk1_dnode3_x2_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk1_dnode3_x2"
+  top: "decoder_blk1_dnode3_x2"
+}
+layer {
+  name: "decoder_blk1_unode3_x2_conv"
+  type: "Convolution"
+  bottom: "decoder_blk1_dnode3_x2"
+  top: "decoder_blk1_unode3_x2_conv"
+  convolution_param {
+    num_output: 768
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk1_unode3_x2_conv_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk1_unode3_x2_conv"
+  top: "decoder_blk1_unode3_x2_conv"
+}
+layer {
+  name: "decoder_blk1_unode3_x2"
+  type: "Dtow"
+  bottom: "decoder_blk1_unode3_x2_conv"
+  top: "decoder_blk1_unode3_x2"
+  dtow_param {
+    psize: 2
+  }
+}
+layer {
+  name: "decoder_blk1_name_unode3_data"
+  type: "Concat"
+  bottom: "decoder_blk1_unode3_x2"
+  bottom: "decoder_blk1_dnode3_conv2"
+  top: "decoder_blk1_name_unode3_data"
+}
+layer {
+  name: "decoder_blk1_unode3_conv1"
+  type: "Convolution"
+  bottom: "decoder_blk1_name_unode3_data"
+  top: "decoder_blk1_unode3_conv1"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk1_unode3_conv1_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk1_unode3_conv1"
+  top: "decoder_blk1_unode3_conv1"
+}
+layer {
+  name: "decoder_blk1_unode3_conv2"
+  type: "Convolution"
+  bottom: "decoder_blk1_unode3_conv1"
+  top: "decoder_blk1_unode3_conv2"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk1_unode3_conv2_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk1_unode3_conv2"
+  top: "decoder_blk1_unode3_conv2"
+}
+layer {
+  name: "decoder_blk1_unode2_x2_conv"
+  type: "Convolution"
+  bottom: "decoder_blk1_unode3_conv2"
+  top: "decoder_blk1_unode2_x2_conv"
+  convolution_param {
+    num_output: 768
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk1_unode2_x2_conv_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk1_unode2_x2_conv"
+  top: "decoder_blk1_unode2_x2_conv"
+}
+layer {
+  name: "decoder_blk1_unode2_x2"
+  type: "Dtow"
+  bottom: "decoder_blk1_unode2_x2_conv"
+  top: "decoder_blk1_unode2_x2"
+  dtow_param {
+    psize: 2
+  }
+}
+layer {
+  name: "decoder_blk1_name_unode2_data"
+  type: "Concat"
+  bottom: "decoder_blk1_unode2_x2"
+  bottom: "decoder_blk1_dnode2_conv2"
+  top: "decoder_blk1_name_unode2_data"
+}
+layer {
+  name: "decoder_blk1_unode2_conv1"
+  type: "Convolution"
+  bottom: "decoder_blk1_name_unode2_data"
+  top: "decoder_blk1_unode2_conv1"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk1_unode2_conv1_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk1_unode2_conv1"
+  top: "decoder_blk1_unode2_conv1"
+}
+layer {
+  name: "decoder_blk1_unode2_conv2"
+  type: "Convolution"
+  bottom: "decoder_blk1_unode2_conv1"
+  top: "decoder_blk1_unode2_conv2"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk1_unode2_conv2_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk1_unode2_conv2"
+  top: "decoder_blk1_unode2_conv2"
+}
+layer {
+  name: "decoder_blk1_unode1_x2_conv"
+  type: "Convolution"
+  bottom: "decoder_blk1_unode2_conv2"
+  top: "decoder_blk1_unode1_x2_conv"
+  convolution_param {
+    num_output: 768
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk1_unode1_x2_conv_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk1_unode1_x2_conv"
+  top: "decoder_blk1_unode1_x2_conv"
+}
+layer {
+  name: "decoder_blk1_unode1_x2"
+  type: "Dtow"
+  bottom: "decoder_blk1_unode1_x2_conv"
+  top: "decoder_blk1_unode1_x2"
+  dtow_param {
+    psize: 2
+  }
+}
+layer {
+  name: "decoder_blk1_name_unode1_data"
+  type: "Concat"
+  bottom: "decoder_blk1_unode1_x2"
+  bottom: "decoder_blk1_dnode1_conv2"
+  top: "decoder_blk1_name_unode1_data"
+}
+layer {
+  name: "decoder_blk1_unode1_conv1"
+  type: "Convolution"
+  bottom: "decoder_blk1_name_unode1_data"
+  top: "decoder_blk1_unode1_conv1"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk1_unode1_conv1_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk1_unode1_conv1"
+  top: "decoder_blk1_unode1_conv1"
+}
+layer {
+  name: "decoder_blk1_unode1_conv2"
+  type: "Convolution"
+  bottom: "decoder_blk1_unode1_conv1"
+  top: "decoder_blk1_unode1_conv2"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_blk1_unode1_conv2_relu"
+  type: "TPReLU"
+  bottom: "decoder_blk1_unode1_conv2"
+  top: "decoder_blk1_unode1_conv2"
+}
+layer {
+  name: "decoder_blk1"
+  type: "Eltwise"
+  bottom: "decoder_up2"
+  bottom: "decoder_blk1_unode1_conv2"
+  top: "decoder_blk1"
+}
+layer {
+  name: "decoder_conv1"
+  type: "Convolution"
+  bottom: "decoder_blk1"
+  top: "decoder_conv1"
+  convolution_param {
+    num_output: 192
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}
+layer {
+  name: "decoder_conv1_relu"
+  type: "TPReLU"
+  bottom: "decoder_conv1"
+  top: "decoder_conv1"
+}
+layer {
+  name: "decoder_up3"
+  type: "Dtow"
+  bottom: "decoder_conv1"
+  top: "decoder_up3"
+  dtow_param {
+    psize: 2
+  }
+}
+layer {
+  name: "gdata"
+  type: "Convolution"
+  bottom: "decoder_up3"
+  top: "gdata"
+  convolution_param {
+    num_output: 3
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+  }
+}

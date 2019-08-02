@@ -1,0 +1,19 @@
+input:"data"
+input_dim:1
+input_dim:16
+input_dim:120
+input_dim:120
+layer{
+	name: "patch"
+	type: "EntropyPatch"
+	bottom: "data"
+	top: "patch"
+	top: "shape"
+	net_id: 2
+	entropy_patch_param{
+		height: 60
+		width: 60
+		stride_h: 48
+		stride_w: 48
+	}
+}
